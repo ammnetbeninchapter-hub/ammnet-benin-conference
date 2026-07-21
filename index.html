@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conférence Nationale AMMnet Bénin — Paludisme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241A22;
+    --paper:#F8F5F0;
+    --paper-2:#EFE8E4;
+    --green:#4A1A3E;
+    --green-deep:#2E0F27;
+    --ochre:#D9A61E;
+    --ochre-light:#F0CE72;
+    --terracotta:#C4294F;
+    --line:#DDD3D8;
+    --muted:#71636C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ochre);
+    font-weight:500;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,243,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand-logo{height:32px; width:auto; display:block;}
+  .navlinks{display:flex; gap:28px; font-size:14px;}
+  .navlinks a{text-decoration:none; color:var(--ink); opacity:0.75; transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .navlinks{display:none;}
+  @media(min-width:760px){.navlinks{display:flex;}}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--green); color:var(--paper);
+    padding:10px 20px; border-radius:2px;
+    text-decoration:none; font-size:14px; font-weight:500;
+    border:1px solid var(--green);
+    transition:transform .15s ease, background .2s ease;
+  }
+  .btn:hover{background:var(--green-deep); transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent; color:var(--ink); border:1px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--ink); background:transparent;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:100px 0 80px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1fr; gap:48px; align-items:center;
+    position:relative; z-index:2;
+  }
+  @media(min-width:860px){.hero-grid{grid-template-columns:1.1fr 0.9fr;}}
+  .hero h1{
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.08;
+    margin:14px 0 20px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--green);
+    border-bottom:3px solid var(--ochre-light);
+  }
+  .hero p.lede{
+    font-size:17px; color:var(--muted); max-width:46ch; margin-bottom:28px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:24px; margin:28px 0 32px;
+    font-size:14px;
+  }
+  .hero-meta div{display:flex; flex-direction:column; gap:2px;}
+  .hero-meta .k{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono',monospace;}
+  .hero-meta .v{font-weight:500;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  /* Signature: network/graph visual */
+  .signature{
+    position:relative; width:100%; aspect-ratio:1/1; max-width:420px; margin:0 auto;
+  }
+  .signature svg{width:100%; height:100%;}
+  .node{fill:var(--paper);}
+  .node-core{fill:var(--terracotta);}
+  .edge{stroke:var(--green); stroke-width:1; opacity:0.45;}
+  .pulse{
+    fill:none; stroke:var(--ochre); stroke-width:1.4;
+    stroke-dasharray:4 5; opacity:0.7;
+    animation:rotate 40s linear infinite;
+    transform-origin:center;
+  }
+  @keyframes rotate{ to{ transform:rotate(360deg);} }
+  @media (prefers-reduced-motion: reduce){ .pulse{animation:none;} }
+
+  /* SECTIONS */
+  section{padding:72px 0; border-bottom:1px solid var(--line);}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(24px,3.4vw,34px); margin-top:10px;}
+  .section-head p{color:var(--muted); margin-top:12px; font-size:15px;}
+
+  /* About */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:32px;}
+  @media(min-width:760px){.about-grid{grid-template-columns:repeat(3,1fr);}}
+  .about-card{
+    border-top:2px solid var(--ochre);
+    padding-top:16px;
+  }
+  .about-card h3{font-size:17px; margin-bottom:8px;}
+  .about-card p{font-size:14px; color:var(--muted);}
+
+  /* Themes */
+  .themes{
+    display:grid; grid-template-columns:1fr; gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  @media(min-width:700px){.themes{grid-template-columns:1fr 1fr;}}
+  .theme{
+    background:var(--paper); padding:26px 28px; position:relative;
+  }
+  .theme .num{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ochre); font-weight:500;
+  }
+  .theme h3{font-size:17px; margin:8px 0 8px;}
+  .theme p{font-size:14px; color:var(--muted);}
+
+  /* Program timeline */
+  .timeline{border-left:2px solid var(--line); margin-left:8px;}
+  .tl-item{
+    position:relative; padding:0 0 32px 28px;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-7px; top:2px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--green);
+  }
+  .tl-item.accent::before{border-color:var(--terracotta); background:var(--terracotta);}
+  .tl-time{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); display:block; margin-bottom:4px;}
+  .tl-item h3{font-size:16px; margin-bottom:4px;}
+  .tl-item p{font-size:14px; color:var(--muted);}
+
+  /* Call for abstracts */
+  .cfa{
+    background:var(--green-deep); color:var(--paper);
+    border-radius:4px; padding:44px;
+  }
+  .cfa .eyebrow{color:var(--ochre-light);}
+  .cfa h2{color:var(--paper); font-size:clamp(22px,3vw,30px); margin:10px 0 16px;}
+  .cfa p{color:#D8DFD9; font-size:15px; max-width:60ch;}
+  .cfa-dates{
+    display:grid; grid-template-columns:1fr; gap:20px; margin:32px 0;
+  }
+  @media(min-width:700px){.cfa-dates{grid-template-columns:repeat(3,1fr);}}
+  .cfa-date{border-top:1px solid rgba(255,255,255,0.2); padding-top:12px;}
+  .cfa-date .k{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ochre-light);}
+  .cfa-date .v{font-size:17px; font-weight:500; margin-top:6px;}
+  .cfa .btn{background:var(--ochre); border-color:var(--ochre); color:var(--green-deep); margin-top:8px;}
+  .cfa .btn:hover{background:var(--ochre-light); border-color:var(--ochre-light);}
+
+  /* Committee / partners */
+  .partners{display:flex; flex-wrap:wrap; gap:14px;}
+  .partner-chip{
+    border:1px solid var(--line); padding:10px 16px; font-size:13px; font-weight:500;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* Contact / footer */
+  footer{padding:56px 0 40px;}
+  .foot-grid{display:grid; grid-template-columns:1fr; gap:32px;}
+  @media(min-width:760px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+  footer h3{font-size:14px; margin-bottom:12px;}
+  footer p, footer a{font-size:13px; color:var(--muted); text-decoration:none;}
+  footer .fine{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--muted);}
+
+  .note{
+    font-size:13px; color:var(--muted); background:var(--paper-2);
+    border-left:3px solid var(--ochre); padding:12px 16px; margin-top:20px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><img src="logo-ammnet-benin.png" alt="AMMnet Bénin" class="brand-logo"></div>
+    <div class="navlinks">
+      <a href="#apropos">À propos</a>
+      <a href="#themes">Thématiques</a>
+      <a href="#programme">Programme</a>
+      <a href="#resumes">Appel à résumés</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3ZAXMvlrIneAJhiwNHZjx5dV91T8iAfs4MR7RmG-nuzPatw/viewform?usp=header" target="_blank" rel="noopener" class="btn">Soumettre un résumé</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">1ère conférence nationale · AMMnet Bénin</span>
+      <h1>Relier la <em>recherche</em> et la décision face au paludisme</h1>
+      <p class="lede">Une journée pour réunir chercheurs, modélisateurs et le Programme National de Lutte contre le Paludisme autour des données qui orientent la lutte contre le paludisme au Bénin.</p>
+      <div class="hero-meta">
+        <div><span class="k">Date</span><span class="v">À confirmer 2026</span></div>
+        <div><span class="k">Lieu</span><span class="v">Cotonou, Bénin</span></div>
+        <div><span class="k">Format</span><span class="v">Présentiel · 1 journée</span></div>
+      </div>
+      <div class="hero-ctas">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3ZAXMvlrIneAJhiwNHZjx5dV91T8iAfs4MR7RmG-nuzPatw/viewform?usp=header" target="_blank" rel="noopener" class="btn">Soumettre un résumé →</a>
+        <a href="#programme" class="btn btn-ghost">Voir le programme</a>
+      </div>
+    </div>
+    <div class="signature">
+      <svg viewBox="0 0 400 400" role="img" aria-label="Réseau de données représentant la modélisation du paludisme">
+        <circle class="pulse" cx="200" cy="200" r="150"/>
+        <circle class="pulse" cx="200" cy="200" r="110" style="animation-direction:reverse; animation-duration:55s;"/>
+        <g stroke="var(--green)" stroke-width="1" opacity="0.5">
+          <line x1="200" y1="200" x2="90" y2="120"/>
+          <line x1="200" y1="200" x2="320" y2="100"/>
+          <line x1="200" y1="200" x2="340" y2="230"/>
+          <line x1="200" y1="200" x2="260" y2="330"/>
+          <line x1="200" y1="200" x2="110" y2="300"/>
+          <line x1="200" y1="200" x2="70" y2="210"/>
+          <line x1="90" y1="120" x2="320" y2="100"/>
+          <line x1="340" y1="230" x2="260" y2="330"/>
+          <line x1="110" y1="300" x2="70" y2="210"/>
+        </g>
+        <circle class="node-core" cx="200" cy="200" r="14"/>
+        <circle class="node" cx="90" cy="120" r="9" stroke="var(--green)" stroke-width="1.5"/>
+        <circle class="node" cx="320" cy="100" r="7" stroke="var(--green)" stroke-width="1.5"/>
+        <circle class="node" cx="340" cy="230" r="10" stroke="var(--ochre)" stroke-width="1.5"/>
+        <circle class="node" cx="260" cy="330" r="8" stroke="var(--green)" stroke-width="1.5"/>
+        <circle class="node" cx="110" cy="300" r="9" stroke="var(--ochre)" stroke-width="1.5"/>
+        <circle class="node" cx="70" cy="210" r="7" stroke="var(--green)" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="apropos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">À propos</span>
+      <h2>Un chapitre national, une mission continentale</h2>
+      <p>AMMnet Bénin fait partie du réseau AMMnet (Applied Malaria Modeling Network), qui rassemble modélisateurs, analystes et professionnels de santé publique dans plus de 20 pays d'Afrique pour renforcer l'usage des données dans la lutte contre le paludisme.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Pourquoi cette conférence</h3>
+        <p>Créer un espace annuel où les résultats de recherche rencontrent les besoins opérationnels du PNLP et des acteurs de terrain.</p>
+      </div>
+      <div class="about-card">
+        <h3>Pour qui</h3>
+        <p>Chercheurs, doctorants, entomologistes, épidémiologistes, statisticiens, agents du PNLP et partenaires techniques.</p>
+      </div>
+      <div class="about-card">
+        <h3>Ce qui en ressort</h3>
+        <p>Un programme scientifique de qualité et une synthèse de recommandations remise au PNLP en fin de journée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Thématiques</span>
+      <h2>Axes de recherche ciblés</h2>
+      <p>Les résumés sont attendus dans l'un des axes suivants.</p>
+    </div>
+    <div class="themes">
+      <div class="theme">
+        <span class="num">01</span>
+        <h3>Modélisation et analyse de données</h3>
+        <p>Modèles de transmission, outils de simulation, tableaux de bord pour la décision.</p>
+      </div>
+      <div class="theme">
+        <span class="num">02</span>
+        <h3>Entomologie et lutte anti-vectorielle</h3>
+        <p>Résistance aux insecticides, moustiquaires, espèces vectorielles émergentes.</p>
+      </div>
+      <div class="theme">
+        <span class="num">03</span>
+        <h3>Épidémiologie et surveillance</h3>
+        <p>Données de terrain, systèmes de surveillance, cartographie du risque.</p>
+      </div>
+      <div class="theme">
+        <span class="num">04</span>
+        <h3>Interventions et chimioprévention</h3>
+        <p>Évaluation d'impact des stratégies : CPS, TPI, moustiquaires imprégnées.</p>
+      </div>
+      <div class="theme">
+        <span class="num">05</span>
+        <h3>Santé publique et politiques</h3>
+        <p>Traduction de la recherche en décision, expérience du PNLP.</p>
+      </div>
+      <div class="theme">
+        <span class="num">06</span>
+        <h3>Jeunes chercheurs</h3>
+        <p>Travaux de master et de thèse en cours, ouverts à tous les axes ci-dessus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Programme</span>
+      <h2>Déroulé de la journée</h2>
+      <p>Programme indicatif — sujet à ajustement selon le nombre de soumissions reçues.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-time">08h30 – 09h00</span>
+        <h3>Accueil et enregistrement</h3>
+      </div>
+      <div class="tl-item accent">
+        <span class="tl-time">09h00 – 09h30</span>
+        <h3>Ouverture officielle</h3>
+        <p>Mots d'introduction — AMMnet Bénin, PNLP, partenaires.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">09h30 – 11h45</span>
+        <h3>Session scientifique I</h3>
+        <p>Présentations orales — modélisation, entomologie, épidémiologie.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">11h45 – 12h30</span>
+        <h3>Session posters</h3>
+        <p>Présentation des résumés retenus au format poster.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">12h30 – 13h30</span>
+        <h3>Déjeuner</h3>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">13h30 – 15h00</span>
+        <h3>Session scientifique II</h3>
+        <p>Présentations orales — interventions, chimioprévention, jeunes chercheurs.</p>
+      </div>
+      <div class="tl-item accent">
+        <span class="tl-time">15h00 – 16h15</span>
+        <h3>Table ronde — de la recherche à la décision</h3>
+        <p>Dialogue avec le PNLP sur les implications des résultats présentés.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">16h15 – 16h45</span>
+        <h3>Synthèse et recommandations</h3>
+      </div>
+      <div class="tl-item">
+        <span class="tl-time">16h45 – 17h00</span>
+        <h3>Clôture</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resumes">
+  <div class="wrap">
+    <div class="cfa">
+      <span class="eyebrow">Appel à résumés</span>
+      <h2>Présentez vos résultats de recherche</h2>
+      <p>Les résumés sont acceptés en présentation orale (15 min) ou en format poster. Le comité scientifique attribue le format final selon la pertinence et le volume de soumissions.</p>
+      <div class="cfa-dates">
+        <div class="cfa-date">
+          <div class="k">Ouverture des soumissions</div>
+          <div class="v">À confirmer</div>
+        </div>
+        <div class="cfa-date">
+          <div class="k">Date limite</div>
+          <div class="v">À confirmer</div>
+        </div>
+        <div class="cfa-date">
+          <div class="k">Notification aux auteurs</div>
+          <div class="v">À confirmer</div>
+        </div>
+      </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3ZAXMvlrIneAJhiwNHZjx5dV91T8iAfs4MR7RmG-nuzPatw/viewform?usp=header" target="_blank" rel="noopener" class="btn">Accéder au formulaire de soumission →</a>
+      <p class="note" style="background:rgba(255,255,255,0.06); border-left-color:var(--ochre-light); color:#D8DFD9;">À faire : complétez les dates ci-dessus une fois fixées avec votre comité.</p>
+    </div>
+  </div>
+</section>
+
+<section id="comite">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Organisation</span>
+      <h2>Comité et partenaires</h2>
+      <p>Portée par le chapitre AMMnet Bénin, en lien avec :</p>
+    </div>
+    <div class="partners">
+      <span class="partner-chip">PNLP Bénin</span>
+      <span class="partner-chip">CREC — Centre de Recherche Entomologique de Cotonou</span>
+      <span class="partner-chip">AMMnet — Applied Malaria Modeling Network</span>
+      <span class="partner-chip">Universités et instituts partenaires</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="logo-ammnet-benin.png" alt="AMMnet Bénin" style="height:28px; width:auto; margin-bottom:14px; display:block;">
+        <p style="max-width:40ch;">Chapitre national du réseau AMMnet, dédié au renforcement de la modélisation et de l'analyse de données au service de la lutte contre le paludisme.</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><a href="mailto:ammnetbeninchapter@gmail.com">ammnetbeninchapter@gmail.com</a></p>
+        <p style="margin-top:6px;"><a href="tel:+22901477245">+229 01 47 72 45 05</a></p>
+        <p><a href="tel:+22901963734">+229 01 96 37 34 94</a></p>
+      </div>
+      <div>
+        <h3>Réseau</h3>
+        <p><a href="https://www.ammnet.org" target="_blank" rel="noopener">ammnet.org</a></p>
+      </div>
+    </div>
+    <div class="fine">© 2026 AMMnet Bénin — Conférence nationale sur le paludisme.</div>
+  </div>
+</footer>
+
+</body>
+</html>
